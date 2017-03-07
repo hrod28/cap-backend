@@ -3,7 +3,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('dishes', (table) => {
     table.increments();
-    table.string('chef_id').notNullable().defaultTo('');
+    table.integer('chef_id').references('id').inTable('chefs').onDelete('CASCADE').index();
     table.string('plate_name').notNullable().defaultTo('');
     table.string('description').defaultTo('');
     table.string('ingredients').notNullable('').defaultTo('');

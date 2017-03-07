@@ -3,7 +3,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('visited_chefs', (table) => {
     table.increments();
-    table.string('user_id').notNullable().defaultTo('');
+    table.integer('user_id').references('id').inTable('users').onDelete('CASCADE').index();
     table.boolean('visit_chef1').notNullable().defaultTo(false);
     table.boolean('visit_chef2').notNullable().defaultTo(false);
     table.boolean('visit_chef3').notNullable().defaultTo(false);

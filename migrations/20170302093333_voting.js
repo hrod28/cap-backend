@@ -3,8 +3,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('votes', (table) => {
     table.increments();
-    table.string('user_id').notNullable().defaultTo('');
-    table.string('chef_id').notNullable().defaultTo('');
+    table.integer('user_id').references('id').inTable('users').onDelete('CASCADE').index();
+    table.integer('chef_id').references('id').inTable('chefs').onDelete('CASCADE').index();
 
   });
 };
