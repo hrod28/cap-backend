@@ -3,12 +3,11 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('comments', (table) => {
     table.increments();
-    table.string('user_id').notNullable().defaultTo('');
-    table.string('chef_id').defaultTo('');
-    table.string('comment_body').notNullable().defaultTo('');
-    table.string('post_id').defaultTo('');
-
-
+    table.integer('user_id').references('id').inTable('users').onDelete('CASCADE').index();
+    table.integer('post_id').references('id').inTable('posts').onDelete('CASCADE').index();
+    table.integer('chef_id').references('id').inTable('chefs').onDelete('CASCADE').index();
+    table.text('comment_body').defaultTo('');
+    table.timestamps(true, true);
   });
 };
 
