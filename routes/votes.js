@@ -15,7 +15,7 @@ const boom = require('boom');
 //get user by id
 router.get('/', (req, res, next) => {
   knex('votes')
-    .select('id', 'user_id', 'chef_id')
+    .select('name', 'number_of_votes')
     .then((results) => {
       res.json(results);
     })

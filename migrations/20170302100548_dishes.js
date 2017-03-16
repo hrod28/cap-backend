@@ -8,6 +8,8 @@ exports.up = function(knex, Promise) {
     table.string('description').defaultTo('');
     table.string('ingredients').notNullable('').defaultTo('');
     table.string('photo_url').defaultTo('');
+    table.string('pairs_with').defaultTo('');
+    table.string('pairs_with_desc').defaultTo('');
 
   });
 };
