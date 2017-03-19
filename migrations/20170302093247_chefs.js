@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
     table.string('paired_with').defaultTo('');
     table.string('serving_location').defaultTo('');
     table.string('photo_url').defaultTo('');
+    table.string('restaurant_url').defaultTo('');
 
 
 
