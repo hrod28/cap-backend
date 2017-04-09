@@ -3,8 +3,9 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('posts', (table) => {
     table.increments();
-    table.integer('user_id').references('id').inTable('users').onDelete('CASCADE').index();
-    table.string('post_body').notNullable().defaultTo('');
+    table.text('title').defaultTo('');
+    table.text('description').defaultTo('');
+    table.text('picture_url').defaultTo('');
 
   });
 };

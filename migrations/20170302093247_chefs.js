@@ -3,12 +3,14 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('chefs', (table) => {
     table.increments();
-    table.string('name').notNullable().defaultTo('');
-    table.string('restaurant').defaultTo('');
-    table.string('paired_with').defaultTo('');
-    table.string('serving_location').defaultTo('');
-    table.string('photo_url').defaultTo('');
-    table.string('restaurant_url').defaultTo('');
+    table.text('name').notNullable().defaultTo('');
+    table.text('restaurant').defaultTo('');
+    table.text('restaurant_logo').defaultTo('');
+    table.text('paired_with').defaultTo('');
+    table.text('paired_logo').defaultTo('');
+    table.text('serving_location').defaultTo('');
+    table.text('photo_url').defaultTo('');
+    table.text('restaurant_url').defaultTo('');
 
 
 

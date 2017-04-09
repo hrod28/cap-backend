@@ -8,13 +8,7 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('votes').insert({
           id: 1,
-          user_id: 2,
-          chef_id: 2
-        }),
-        knex('votes').insert({
-          id: 2,
-          user_id: 1,
-          chef_id: 2
+          map_photo: 'http://pedalfortcollins.com/wp-content/uploads/2015/09/Mid-town_clipping.jpg'
         })
         .then(() => {
         return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");

@@ -8,34 +8,27 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries
         knex('comments').insert({
           id: 1,
-          user_id: 2,
-          chef_id: 1,
-          comment_body: 'Full of Flavor!!'
+          time: '2pm',
+          title: 'Competition',
+          description: 'olor sit amet, consectetur adipiscing elit, sed do'
         }),
         knex('comments').insert({
           id: 2,
-          user_id: 1,
-          chef_id: 1,
-          comment_body: 'Best burger I\'ve had all day!!'
+          time: '4pm',
+          title: 'Band Plays',
+          description: 'olor sit amet, consectetur adipiscing elit, sed do'
         }),
         knex('comments').insert({
           id: 3,
-          user_id: 2,
-          chef_id: 1,
-          comment_body: 'This burger is a work of fine art!!'
+          time: '6-8pm',
+          title: 'Silent Auction',
+          description: 'olor sit amet, Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident sed do'
         }),
         knex('comments').insert({
           id: 4,
-          user_id: 1,
-          comment_body: 'I think the awards ceremony will be held at the Family Center',
-          post_id: 1
-        }),
-        knex('comments').insert({
-          id: 5,
-          user_id: 2,
-          chef_id: 2,
-          comment_body: 'the salsa was too hot for me!'
-
+          time: '8-?',
+          title: 'Party the night away',
+          description: 'olor sit amet, consectetur adipiscingDui cupidatat non proident elit, sed do'
         })
         .then(() => {
         return knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))");

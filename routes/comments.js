@@ -12,10 +12,10 @@ const boom = require('boom');
 
 //ROUTES ------------------------------------------------
 
-//get user by id
+
 router.get('/', (req, res, next) => {
   knex('comments')
-    .select('id', 'user_id', 'post_id', 'chef_id', 'comment_body')
+    .select('id', 'time', 'title', 'description')
     .then((results) => {
       res.json(results);
     })
@@ -23,40 +23,41 @@ router.get('/', (req, res, next) => {
       res.send(err);
     });
 });
-
-router.get('/:postId', (req, res, next) => {
-  knex('comments')
-  .where('posts.id', req.params.postId)
-  .join('posts', 'comments.post_id', '=', 'posts.id')
-  .join('users', 'comments.user_id', '=', 'users.id')
-  .select('posts.id', 'comment_body', 'users.username', 'comments.user_id')
-  // .orderBy('id')
-  .then((data) => {
-    data = camelizeKeys(data);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.send(data);
-  })
-  .catch((err) => {
-      next(err);
-    });
-});
-
-router.get('/:chefId', (req, res, next) => {
-  knex('comments')
-  .where('chefs.id', req.params.chefId)
-  .join('chefs', 'comments.chef_id', '=', 'chefs.id')
-  .join('users', 'comments.user_id', '=', 'users.id')
-  .select('chefs.id', 'comment_body', 'users.username', 'comments.user_id')
-  // .orderBy('id')
-  .then((data) => {
-    data = camelizeKeys(data);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.send(data);
-  })
-  .catch((err) => {
-      next(err);
-    });
-});
+module.exports = router;
+//
+// router.get('/:postId', (req, res, next) => {
+//   knex('comments')
+//   .where('posts.id', req.params.postId)
+//   .join('posts', 'comments.post_id', '=', 'posts.id')
+//   .join('users', 'comments.user_id', '=', 'users.id')
+//   .select('posts.id', 'comment_body', 'users.username', 'comments.user_id')
+//   // .orderBy('id')
+//   .then((data) => {
+//     data = camelizeKeys(data);
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.send(data);
+//   })
+//   .catch((err) => {
+//       next(err);
+//     });
+// });
+//
+// router.get('/:chefId', (req, res, next) => {
+//   knex('comments')
+//   .where('chefs.id', req.params.chefId)
+//   .join('chefs', 'comments.chef_id', '=', 'chefs.id')
+//   .join('users', 'comments.user_id', '=', 'users.id')
+//   .select('chefs.id', 'comment_body', 'users.username', 'comments.user_id')
+//   // .orderBy('id')
+//   .then((data) => {
+//     data = camelizeKeys(data);
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.send(data);
+//   })
+//   .catch((err) => {
+//       next(err);
+//     });
+// });
 
 // router.get('/:chefId', (req, res, next) => {
 //   knex('posts')
@@ -95,7 +96,6 @@ router.get('/:chefId', (req, res, next) => {
 
 
 
-module.exports = router;
 
 
 // 'use strict';
