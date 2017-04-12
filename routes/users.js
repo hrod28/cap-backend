@@ -24,7 +24,6 @@ router.get('/', (req, res, next) => {
     });
 });
 
-module.exports = router;
 
 // router.get('/:id', (req,res) => {
 //   knex('users')
@@ -48,26 +47,31 @@ module.exports = router;
 //   });
 // });
 //
-// router.post('/', (req,res) => {
-//   console.log('reach post route');
-//   knex('users')
-//     .insert({
-//       'id': req.body.id,
-//       'first_name': req.body.firstName,
-//       'last_name': req.body.lastName,
-//       'username': req.body.username,
-//       'password': req.body.password,
-//       'email': req.body.email,
-//       'is_admin': req.body.isAdmin
-//     }, ['id', 'first_name', 'last_name', 'username', 'password', 'email', 'is_admin'])
-//     .then((result) => {
-//       console.log("RESULT", result[0]);
-//       res.send(result[0]);
-//     })
-//     .catch((err)=>{
-//       res.send(err);
-//     });
-// });
+router.post('/', (req,res) => {
+  console.log('reach post route');
+  knex('users')
+    .insert({
+      'id': req.body.id,
+      'first_name': req.body.first_name,
+      'last_name': req.body.last_name,
+      'username': req.body.username,
+      'password': req.body.password,
+      'email': req.body.email,
+      'visited_all': req.body.visited_all,
+      'vote1': req.body.vote1,
+      'vote2': req.body.vote2,
+      'is_admin': req.body.isAdmin
+    }, ['id', 'first_name', 'last_name', 'username', 'password', 'email', 'visited_all', 'vote1', 'vote2', 'is_admin'])
+    .then((result) => {
+      console.log("RESULT", result[0]);
+      res.send(result[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+module.exports = router;
 //
 // router.patch('/:id', (req, res)=>{
 //   console.log('top of patch function');

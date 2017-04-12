@@ -7,8 +7,8 @@ exports.up = function(knex, Promise) {
     table.string('last_name').defaultTo('');
     table.string('username').defaultTo('');
     table.string('password').defaultTo('');
-    table.string('email').unique().defaultTo('');
-    table.boolean('visited_all').defaultTo('');
+    table.string('email').defaultTo('');
+    table.string('visited_all').defaultTo('');
     table.string('vote1').defaultTo('');
     table.string('vote2').defaultTo('');
     table.boolean('is_admin').defaultTo(false);
