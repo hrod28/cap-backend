@@ -13,10 +13,9 @@ const boom = require('boom');
 
 //get user by id
 router.get('/', (req, res) => {
-  knex('chefs')
+  knex('brewers')
     .orderBy('id', 'asc')
-    .select('id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url')
-    .orderBy('id')
+    .select('id', 'name', 'brewery', 'brewery_logo', 'featured_drink', 'description', 'serving_location', 'photo_url', 'brewery_url')
     .then((results) => {
       res.json(results);
       console.log(results);
@@ -27,8 +26,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req,res) => {
-  knex('chefs')
-    .select('id', 'name', 'restaurant', 'restaurant_url', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url' )
+  knex('brewers')
+    .select('id', 'name', 'brewery', 'brewery_logo', 'featured_drink', 'description', 'serving_location', 'photo_url', 'brewery_url')
     .where({id: req.params.id})
     .then((results) => {
       res.json(results[0]);
@@ -40,17 +39,16 @@ router.get('/:id', (req,res) => {
 
 router.post('/', (req,res) => {
   console.log('reach post route');
-  knex('chefs')
+  knex('brewers')
     .insert({
       name: req.body.name,
-      restaurant: req.body.restaurant,
-      restaurant_logo: req.body.restaurant_logo,
-      paired_with: req.body.paired_with,
-      paired_logo: req.body.paired_logo,
+      brewery: req.body.brewery,
+      brewery_logo: req.body.brewery_logo,
+      featured_drink: req.body.featured_drink,
       serving_location: req.body.serving_location,
       photo_url: req.body.photo_url,
-      restaurant_url: req.body.restaurant_url
-    }, ['id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url'])
+      brewery_url: req.body.brewery_url
+    }, ['id', 'name', 'brewery', 'brewery_logo', 'featured_drink', 'serving_location', 'photo_url', 'brewery_url'])
     .then((result) => {
       console.log("RESULT", result[0]);
       res.send(result[0]);
@@ -62,17 +60,17 @@ router.post('/', (req,res) => {
 
 router.patch('/:id', (req, res)=>{
   console.log('top of patch function');
-  knex('chefs')
+  knex('brewers')
     .update({
       name: req.body.name,
-      restaurant: req.body.restaurant,
-      restaurant_logo: req.body.restaurant_logo,
-      paired_with: req.body.paired_with,
-      paired_logo: req.body.paired_logo,
+      brewery: req.body.brewery,
+      brewery_logo: req.body.brewery_logo,
+      featured_drink: req.body.featured_drink,
+      description: req.body.description,
       serving_location: req.body.serving_location,
       photo_url: req.body.photo_url,
-      restaurant_url: req.body.restaurant_url
-    }, ['id', 'name', 'restaurant', 'paired_with', 'serving_location', 'photo_url'])
+      brewery_url: req.body.brewery_url
+    }, ['id', 'name', 'brewery', 'brewery_logo', 'featured_drink', 'description', 'serving_location', 'photo_url', 'brewery_url'])
     .where({id: req.params.id})
     .then((result) => {
       console.log("RESULT", result[0]);
@@ -85,13 +83,13 @@ router.patch('/:id', (req, res)=>{
 });
 
 router.delete('/:id', (req,res,next)=>{
-  knex('chefs')
+  knex('brewers')
   .where('id', req.params.id)
   .first()
   .then((response)=>{
     console.log(response);
     let toDelete = camelizeKeys(response);
-    return knex('chefs')
+    return knex('brewers')
     .where('id', toDelete.id)
     .del()
     .then((deleted)=>{

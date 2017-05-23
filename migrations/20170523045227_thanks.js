@@ -1,7 +1,5 @@
-'use strict';
-
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('visited_chefs', (table) => {
+  return knex.schema.createTable('thanks', (table) => {
     table.increments();
     table.text('thanks_name').defaultTo('');
     table.text('description').defaultTo('');
@@ -11,5 +9,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('visited_chefs');
+  return knex.schema.dropTable('thanks');
 };

@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 const users = require('./routes/users');
 const chefs = require('./routes/chefs');
 const posts = require('./routes/posts');
+const brewers = require('./routes/brewers');
 const votes = require('./routes/votes');
 const comments = require('./routes/comments');
 // const visited_chefs = require('./routes/visited_chefs');
@@ -21,6 +22,7 @@ const dishes = require('./routes/dishes');
 
 app.use('/api/users', users);
 app.use('/api/chefs', chefs);
+app.use('/api/brewers', brewers);
 app.use('/api/posts', posts);
 app.use('/api/votes', votes);
 app.use('/api/comments', comments);

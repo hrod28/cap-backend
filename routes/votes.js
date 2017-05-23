@@ -12,7 +12,7 @@ const boom = require('boom');
 
 //ROUTES ------------------------------------------------
 
-//get user by id
+
 router.get('/', (req, res, next) => {
   knex('votes')
     .select('id', 'map_photo')
@@ -23,5 +23,35 @@ router.get('/', (req, res, next) => {
       res.send(err);
     });
 });
+
+router.post('/', (req,res) => {
+  console.log('reach post route');
+  knex('votes')
+    .insert({ map_photo: req.body.map_photo}, ['map_photo'])
+    .then((result) => {
+      console.log("RESULT", result[0]);
+      res.send(result[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+router.delete('/:id', (req,res,next)=>{
+  knex('votes')
+  .where('id', req.params.id)
+  .first()
+  .then((response)=>{
+    console.log(response);
+    let toDelete = camelizeKeys(response);
+    return knex('brewers')
+    .where('id', toDelete.id)
+    .del()
+    .then((deleted)=>{
+      res.send(toDelete);
+  });
+});
+});
+
 
 module.exports = router;

@@ -17,6 +17,7 @@ const boom = require('boom');
 
 router.get('/', (req, res) => {
   knex('posts')
+    .orderBy('id', 'asc')
     .select('id', 'title', 'description', 'picture_url')
     .then((results) => {
       res.json(results);
@@ -25,6 +26,69 @@ router.get('/', (req, res) => {
     .catch((err)=>{
       res.send(err);
     });
+});
+
+router.get('/:id', (req,res) => {
+  knex('posts')
+    .select('id', 'title', 'description', 'picture_url')
+    .where({id: req.params.id})
+    .then((results) => {
+      res.json(results[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+router.post('/', (req,res) => {
+  console.log('reach post route');
+  knex('posts')
+    .insert({
+      title: req.body.title,
+      description: req.body.description,
+      picture_url: req.body.picture_url
+    }, ['id', 'title', 'description', 'picture_url'])
+    .then((result) => {
+      console.log("RESULT", result[0]);
+      res.send(result[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+router.patch('/:id', (req,res) => {
+  console.log('reach post route');
+  knex('posts')
+    .update({
+      title: req.body.title,
+      description: req.body.description,
+      picture_url: req.body.picture_url
+    }, ['id', 'title', 'description', 'picture_url'])
+    .where({id: req.params.id})
+    .then((result) => {
+      console.log("RESULT", result[0]);
+      res.send(result[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+router.delete('/:id', (req,res,next)=>{
+  knex('posts')
+  .where('id', req.params.id)
+  .first()
+  .then((response)=>{
+    console.log(response);
+    let toDelete = camelizeKeys(response);
+    return knex('posts')
+    .where('id', toDelete.id)
+    .del()
+    .then((deleted)=>{
+      res.send(toDelete);
+  });
+});
 });
 
 module.exports = router;
