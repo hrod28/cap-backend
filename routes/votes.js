@@ -23,6 +23,17 @@ router.get('/', (req, res, next) => {
       res.send(err);
     });
 });
+router.get('/id', (req, res, next) => {
+  knex('votes')
+    .select('id', 'map_photo')
+    .where({id: req.params.id})
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
 
 router.post('/', (req,res) => {
   console.log('reach post route');
@@ -30,6 +41,21 @@ router.post('/', (req,res) => {
     .insert({ map_photo: req.body.map_photo}, ['map_photo'])
     .then((result) => {
       console.log("RESULT", result[0]);
+      res.send(result[0]);
+    })
+    .catch((err)=>{
+      res.send(err);
+    });
+});
+
+router.patch('/:id', (req, res) => {
+  knex('comments')
+    .update({
+      map_photo: req.body.map_photo
+
+    }, ['id', 'map_photo'])
+    .where({id: req.params.id})
+    .then((result) => {
       res.send(result[0]);
     })
     .catch((err)=>{

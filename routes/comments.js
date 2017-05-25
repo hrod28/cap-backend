@@ -26,8 +26,8 @@ router.get('/', (req, res) => {
 });
 router.get('/:id', (req, res) => {
   knex('comments')
-
     .select('id', 'time', 'title', 'description')
+    .where({id: req.params.id})
     .then((results) => {
       res.json(results);
     })
