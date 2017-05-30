@@ -35,6 +35,7 @@ router.get('/:id', (req, res) => {
       res.send(err);
     });
 });
+
 router.post('/', (req, res) => {
   knex('comments')
     .insert({
@@ -49,6 +50,7 @@ router.post('/', (req, res) => {
       res.send(err);
     });
 });
+
 router.patch('/:id', (req, res) => {
   knex('comments')
     .update({

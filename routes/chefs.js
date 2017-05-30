@@ -15,7 +15,7 @@ const boom = require('boom');
 router.get('/', (req, res) => {
   knex('chefs')
     .orderBy('id', 'asc')
-    .select('id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url')
+    .select('id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'serving_photo', 'photo_url', 'restaurant_url')
     .orderBy('id')
     .then((results) => {
       res.json(results);
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req,res) => {
   knex('chefs')
-    .select('id', 'name', 'restaurant', 'restaurant_url', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url' )
+    .select('id', 'name', 'restaurant', 'restaurant_logo', 'restaurant_url', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url' )
     .where({id: req.params.id})
     .then((results) => {
       res.json(results[0]);
@@ -48,9 +48,10 @@ router.post('/', (req,res) => {
       paired_with: req.body.paired_with,
       paired_logo: req.body.paired_logo,
       serving_location: req.body.serving_location,
+      serving_photo: req.body.serving_photo,
       photo_url: req.body.photo_url,
       restaurant_url: req.body.restaurant_url
-    }, ['id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url'])
+    }, ['id', 'name', 'restaurant', 'serving_photo', 'restaurant_logo', 'paired_with', 'paired_logo', 'serving_location', 'photo_url', 'restaurant_url'])
     .then((result) => {
       console.log("RESULT", result[0]);
       res.send(result[0]);
@@ -70,9 +71,10 @@ router.patch('/:id', (req, res)=>{
       paired_with: req.body.paired_with,
       paired_logo: req.body.paired_logo,
       serving_location: req.body.serving_location,
+      serving_photo: req.body.serving_photo,
       photo_url: req.body.photo_url,
       restaurant_url: req.body.restaurant_url
-    }, ['id', 'name', 'restaurant', 'paired_with', 'serving_location', 'photo_url'])
+    }, ['id', 'name', 'restaurant', 'restaurant_logo', 'paired_with', 'serving_location', 'photo_url'])
     .where({id: req.params.id})
     .then((result) => {
       console.log("RESULT", result[0]);

@@ -23,7 +23,8 @@ router.get('/', (req, res, next) => {
       res.send(err);
     });
 });
-router.get('/id', (req, res, next) => {
+
+router.get('/:id', (req, res, next) => {
   knex('votes')
     .select('id', 'map_photo')
     .where({id: req.params.id})
@@ -38,7 +39,7 @@ router.get('/id', (req, res, next) => {
 router.post('/', (req,res) => {
   console.log('reach post route');
   knex('votes')
-    .insert({ map_photo: req.body.map_photo}, ['map_photo'])
+    .insert({ map_photo: req.body.map_photo}, ['id', 'map_photo'])
     .then((result) => {
       console.log("RESULT", result[0]);
       res.send(result[0]);
