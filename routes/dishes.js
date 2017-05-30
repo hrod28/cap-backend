@@ -75,7 +75,7 @@ router.patch('/:id', (req,res) => {
       paired_with_desc: req.body.paired_with_desc,
       servedfrom: req.body.servedfrom,
       servedfrom_logo: req.body.servedfrom_logo
-    }, ['id', 'plate_name', 'prepared_by', 'description', 'ingredients', 'photo_url', 'paired_with', 'paired_logo', 'paired_with_desc', 'servedfrom', 'servedfrom_logo', 'location_url',])
+    }, ['id', 'plate_name', 'prepared_by', 'description', 'ingredients', 'photo_url', 'paired_with', 'paired_logo', 'paired_with_desc', 'servedfrom', 'servedfrom_logo', 'location_url'])
     .where({id: req.params.id})
     .then((result) => {
       console.log("RESULT", result[0]);
