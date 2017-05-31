@@ -17,7 +17,7 @@ const posts = require('./routes/posts');
 const brewers = require('./routes/brewers');
 const votes = require('./routes/votes');
 const comments = require('./routes/comments');
-// const visited_chefs = require('./routes/visited_chefs');
+const perks = require('./routes/perks');
 const thanks = require('./routes/thanks');
 const dishes = require('./routes/dishes');
 
@@ -28,7 +28,7 @@ app.use('/api/posts', posts);
 app.use('/api/votes', votes);
 app.use('/api/thanks', thanks);
 app.use('/api/comments', comments);
-// app.use('/api/visited_chefs', visited_chefs);
+app.use('/api/perks', perks);
 app.use('/api/dishes', dishes);
 
 app.listen(port, function () {
